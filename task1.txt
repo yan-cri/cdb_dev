@@ -1,0 +1,4 @@
+## 1. explore heatmap and dot-plot.
+## 2. maybe summarize the results into a table
+## 3. check whether ligand-receptors can be grouped.
+## Final. push your code back to server repo.
