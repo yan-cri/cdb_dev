@@ -1,0 +1,117 @@
+---
+title: "Untitled"
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## JUNK CODE
+```{r}
+# https://jokergoo.github.io/InteractiveComplexHeatmap/articles/shiny_dev.html
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("ComplexHeatmap")
+
+```
+
+## RUN THIS INSTEAD
+```{r}
+# Downloaded file from bioconductor.org (http://www.bioconductor.org/packages/devel/bioc/html/ComplexHeatmap.html)
+# Source: https://stackoverflow.com/questions/70759080/unable-to-load-the-package-complexheatmap
+install.packages("ComplexHeatmap_2.13.0.tar", repos = NULL, type = "source")
+```
+
+```{r}
+install.packages("doParallel") # this fixed the problem with running library(ComplexHeatmap)
+```
+
+```{r}
+# Downloaded file from Bioconductor (http://www.bioconductor.org/packages/release/bioc/html/InteractiveComplexHeatmap.html)
+install.packages("InteractiveComplexHeatmap_1.4.0.tar", repos = NULL, type = "source")
+```
+
+```{r}
+# Alright already! Now will you stop bellyaching?!?!?
+install.packages("clisymbols")
+install.packages("svglite")
+# These are for InteractiveComplexHeatmap
+```
+
+```{r}
+# These are all the packages I had to install just to be able to process a txt file
+install.packages("matrixStats")
+install.packages("png")
+install.packages("GetoptLong")
+# Also need IRanges, which can't be installed simply because... package ‘IRanges’ is not available for this version of R
+# MY F***ING GOD HOW MANY PACKAGES DO YOU SUDDENLY NEED!!!!!??? >:(
+``` 
+
+```{r}
+install.packages("IRanges_2.30.0.tar", repos = NULL, type = "source")
+## ANY DECADE NOW...
+```
+
+```{r}
+install.packages("BiocGenerics_0.42.0.tar", repos = NULL, type = "source")
+install.packages("S4Vectors_0.34.0.tar", repos = NULL, type = "source")
+install.packages("RColorBrewer")
+install.packages("circlize")
+install.packages("clue")
+# ALL RIGHT, LISTEN UP, PUNK. I'M TIRED OF THIS!!! YOU AIN'T GOT NO "CLUE" HOW EXASPERATED I AM RIGHT NOW!!!!!!!!!
+# Phew... that's all that's needed for ComplexHeatmap to stop complaining
+```
+
+```{r}
+# Now to spoon-feed InteractiveHeatMap with...
+install.packages("kableExtr")
+```
+
+```{r}
+# To fix ComplexHeatmap not loading... 
+library(ComplexHeatmap)
+# print("Checkpoint 1: Successfully accessed ComplexHeatmap")
+library(InteractiveComplexHeatmap)
+# print("Checkpoint 2: Successfully accessed InteractiveComplexHeatmap")
+library(shiny)
+# print("Checkpoint 3: Successfully accessed shiny")
+
+my_data <- read.delim("test_data/means.txt")
+my_abridged_data <- my_data[, c(12:495)] # rows 9-32, columns 201-215
+# my_abridged-data does not have columns 1-11 with the non-numeric labels
+# data(rand_mat) # simply a random matrix
+
+# print("Checkpoint 4: Preparing random data...")
+ht1 = Heatmap(my_abridged_data, name = "mat",
+    show_row_names = FALSE, show_column_names = FALSE)
+ht1 = draw(ht1)
+# print("Checkpoint 5: Drew heat map")
+
+ui = fluidPage(
+    # print("Checkpoint 6: Entered ui"),
+    h3("My first interactive ComplexHeatmap Shiny app"),
+    p("This is an interactive heatmap visualization on a random matrix."),
+    InteractiveComplexHeatmapOutput(),
+)
+
+# print("Checkpoint 7: Exited ui")
+
+server = function(input, output, session) {
+    # print("Checkpoint 8: Entered server")
+    makeInteractiveComplexHeatmap(input, output, session, ht1)
+}
+
+# print("Checkpoint 9: Exited server")
+
+shinyApp(ui, server)
+
+```
+
+```{r}
+my_data <- read.delim("cdb_dev/test_data/means.txt")
+```
+
+
