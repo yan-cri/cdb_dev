@@ -86,7 +86,7 @@ my_abridged_data <- my_data[, c(12:495)] # rows 9-32, columns 201-215
 
 # print("Checkpoint 4: Preparing random data...")
 ht1 = Heatmap(my_abridged_data, name = "mat",
-    show_row_names = FALSE, show_column_names = FALSE)
+    show_row_names = TRUE, show_column_names = TRUE)
 ht1 = draw(ht1)
 # print("Checkpoint 5: Drew heat map")
 
