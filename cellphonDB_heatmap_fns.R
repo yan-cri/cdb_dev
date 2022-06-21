@@ -23,7 +23,7 @@ heatmaps_plot = function(meta_file, nameUpdate = F, name2update, updatedName, or
   pairs1_all = unique(meta[,2])
   
   pairs1 = c()
-  for (i in 1:length(pairs1_all))
+  for (i in 1:length(pairs1_all)) # would apply functions be more efficient computationally
     for (j in 1:length(pairs1_all))
       pairs1 = c(pairs1,paste(pairs1_all[i],pairs1_all[j],sep=join_sep))
   
@@ -131,14 +131,14 @@ heatmaps_plot = function(meta_file, nameUpdate = F, name2update, updatedName, or
 library(ggplot2)
 dot_plot = function(selected_rows = NULL,
                     selected_columns = NULL,
-                    filename = 'plot.pdf',
+                    filename = 'plot.png',
                     width = 8,
                     height = 10,
                     means_path = './means.txt',
                     pvalues_path = './pvalues.txt',
                     means_separator = '\t',
                     pvalues_separator = '\t',
-                    output_extension = '.pdf'
+                    output_extension = '.png'
 ){
   
   all_pval = read.table(pvalues_path, header=T, stringsAsFactors = F, sep=means_separator, comment.char = '', check.names=F)
