@@ -16,7 +16,7 @@ heatmaps_plot = function(meta_file, nameUpdate = F, name2update, updatedName, or
   # Hey wait. You're separating values by tabs... in a COMMA-SEPARATED VALUE file!
   # Why not just go with a TSV (tab-separated value) file then?
   
-  all_intr = read.table("./test_data/pvalues.txt", header=T, stringsAsFactors = F, sep='\t', comment.char = '', check.names = F)
+  all_intr = read.table(pvalues_file, header=T, stringsAsFactors = F, sep='\t', comment.char = '', check.names = F)
   intr_pairs = all_intr$interacting_pair
   all_intr = all_intr[,-c(1:11)] # all_intr has 484 different interactions
   
