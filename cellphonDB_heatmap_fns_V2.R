@@ -10,7 +10,7 @@ heatmaps_plot = function(meta_file, nameUpdate = F, name2update, updatedName, or
                          col1 = "dodgerblue4", col2 = 'peachpuff', col3 = 'deeppink4', meta_sep='\t', pvalues_sep='\t', pvalue=0.05, plot.width = 7, plot.height = 7){
   #######   Network
   
-  meta = read.csv("./test_data/means.txt", comment.char = '', sep='\t')
+  meta = read.csv(meta_file, comment.char = '', sep=meta_sep)
   # Why would you remove the default comment.char "#"?
   # Ok, in case the data has pound signs, fine I guess
   # Hey wait. You're separating values by tabs... in a COMMA-SEPARATED VALUE file!
