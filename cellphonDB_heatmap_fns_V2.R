@@ -57,10 +57,11 @@ heatmaps_plot = function(meta_file, nameUpdate = F, name2update, updatedName, or
     n2 = intr_pairs[which(all_intr[, match(TRUE, names(all_intr) == pairs_rev, nomatch = 0)]<=0.05)] # counting the number of interactions AGAIN?
     
     # if the interaction pairs are not the same
-    if(p1!=p2)
+    if(p1!=p2) {
       count1 = length(unique(n1))+length(unique(n2))
-    else
+    } else {
       count1 = length(unique(n1))
+    }
     
     new_count = c(p1,p2,count1)
     names(new_count) = c('SOURCE','TARGET','count')
