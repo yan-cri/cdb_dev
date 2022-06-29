@@ -300,7 +300,7 @@ dot_plot = function(selected_rows = NULL, selected_rows.nameReorder = as.logical
   if (is.null(width)) width  = 3+dim(sel_pval)[2]
   if (is.null(height)) height = round(0.25*dim(sel_pval)[1], digits = 0)
   if (output_extension == '.pdf') {
-    ggsave(filename = file.path(plotDir, filename), width = width, height = height, device = cairo_pdf, limitsize=F)
+    ggsave(filename = file.path(plotDir, filename), width = width, height = height, device = "pdf", limitsize=F)
   }
   else {
     ggsave(filename = file.path(plotDir, filename), width = width, height = height, limitsize=F)

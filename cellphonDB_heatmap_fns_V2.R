@@ -71,9 +71,9 @@ heatmaps_plot = function(meta_file, nameUpdate = F, name2update, updatedName, or
   all_count = all_count[-1,]
   # write.table(all_count, count_network_filename, sep=count_network_separator, quote=F, row.names = F)
   
-  #######   count interactions
   
   # What exactly are you measuring here???
+  # This is for visualization
   if (any(count1)>0)
   {
     count_matrix = matrix(count1, nrow=length(unique(meta[,2])), ncol=length(unique(meta[,2])))
