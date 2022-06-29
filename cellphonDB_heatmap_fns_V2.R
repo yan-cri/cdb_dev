@@ -73,23 +73,6 @@ heatmaps_plot = function(meta_file, nameUpdate = F, name2update, updatedName, or
   
   #######   count interactions
   
-  count1 = c()
-  for(i in 1:length(pairs1))
-  {
-    p1 = strsplit(pairs1[i], split_sep)[[1]][1]
-    p2 = strsplit(pairs1[i], split_sep)[[1]][2]
-    
-    n1 = intr_pairs[which(all_intr[,pairs1[i]]<=pvalue)]
-    
-    pairs_rev = paste(p2, p1, sep=join_sep)
-    n2 = intr_pairs[which(all_intr[,pairs_rev]<=pvalue)]
-    if(p1!=p2)
-      count1 = c(count1,length(unique(n1))+length(unique(n2)))
-    else
-      count1 = c(count1,length(unique(n1)))
-    
-  }
-  
   # What exactly are you measuring here???
   if (any(count1)>0)
   {
