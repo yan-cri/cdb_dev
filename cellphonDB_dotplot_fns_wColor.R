@@ -9,13 +9,20 @@
 library(ggplot2)
 library(dplyr)
 dot_plot = function(selected_rows = NULL, selected_rows.nameReorder = as.logical(F), selected.resSave = as.logical(F), selected.resFnamePrefix = NULL, 
-                    selected_columns = NULL, selected_columns_rename = as.logical(F), subnames = NULL, filename = 'plot.pdf', 
+                    selected_columns = NULL, selected_columns_rename = as.logical(F), subnames = NULL, filename = 'testplot.pdf', 
                     nonSig.removal = as.logical(F), 
                     width = NULL, height = NULL, means_path = './means.txt', pvalues_path = './pvalues.txt', 
                     means_separator = '\t', pvalues_separator = '\t', output_extension = '.pdf', plotDir = getwd(), pvalue=0.05, min.mean = NULL, max.mean = NULL, yAxisCol = NULL, debug = as.logical(F)){
   ## read in 'pvalues_path' and 'means_path' as 'all_pval' and 'all_means'
   all_pval = read.table(pvalues_path, header=T, stringsAsFactors = F, sep=means_separator, comment.char = '', check.names=F)
   all_means = read.table(means_path, header=T, stringsAsFactors = F, sep=pvalues_separator, comment.char = '', check.names=F)
+  
+  # Remove all the duplicates ahead of time!
+  all_pval = all_pval[!duplicated(all_pval$interacting_pair), ]
+  all_means = all_means[which(!duplicated(all_pval$interacting_pair)), ]
+  
+  print(dim(all_pval))
+  
   ## ------------------ ##
   ## if selected_rows!=NULL, select certain rows (ligand-receptor interactions) and output 'annotation' variable.
   if (!is.null(selected_rows)) {
